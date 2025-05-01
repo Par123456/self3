@@ -352,12 +352,10 @@ async def main():
 
         @client.on(events.NewMessage)
         async def enemy_handler(event):
-            global enemies
-            
             try:
                 if not event.from_id:
                     return
-                        
+                    
                 if event.from_id.user_id != (await client.get_me()).id:
                     return
                 
@@ -389,9 +387,10 @@ async def main():
                     while insult2 == insult1:
                         insult2 = random.choice(insults)
                     await event.reply(insult1)
-                    await asyncio.sleep(0.5)
+                    await asyncio.sleep(0.01)
                     await event.reply(insult2)
-            except:
+            except Exception as e:
+                print(f"Error in enemy handler: {e}")
                 pass
 
         @client.on(events.NewMessage)
